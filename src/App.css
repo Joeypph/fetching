@@ -2,7 +2,9 @@
     height: 70vh;
     overflow-y: scroll;
 }
-
+/* .flowProfile::-webkit-scrollbar {
+    display: none;
+} */
 .contain{
     width: 50%;
     height: 20px;
