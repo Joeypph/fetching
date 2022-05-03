@@ -25,7 +25,6 @@ const App = () => {
         setPage(page + 1);
         setData([...data].concat(results));
       }
-      console.log(data);
     } catch (e) {
       console.log(e);
       setIsDataEnd(true);
@@ -37,21 +36,7 @@ const App = () => {
     <div>
       <Grid container>
         <Grid item xs={6} style={{ alignSelf: "center" }}>
-          {/* {spinnerIsVisible && <CircularProgress color="success" />} */}
-          {!isDataEnd ? (
-            <Button
-              variant="contained"
-              onClick={fetchData}
-              style={{ marginLeft: "40%" }}
-            >
-              Cargar más
-            </Button>
-          ) : (
-            <h1>No hay más datos por cargar</h1>
-          )}
-        </Grid>
-        <Grid item xs={6}>
-          {spinnerIsVisible ? (
+          {spinnerIsVisible && (
             <CircularProgress
               color="success"
               style={{
@@ -61,11 +46,25 @@ const App = () => {
                 marginLeft: "40%",
               }}
             />
-          ) : (
-            <Container>
-              <PeopleList data={data} />
-            </Container>
           )}
+          {!isDataEnd ? (
+            !spinnerIsVisible && (
+              <Button
+                variant="contained"
+                onClick={fetchData}
+                style={{ marginLeft: "40%" }}
+              >
+                Cargar más
+              </Button>
+            )
+          ) : (
+            <h1>No hay más datos por cargar</h1>
+          )}
+        </Grid>
+        <Grid item xs={6}>
+          <Container>
+            <PeopleList data={data} />
+          </Container>
         </Grid>
       </Grid>
     </div>
